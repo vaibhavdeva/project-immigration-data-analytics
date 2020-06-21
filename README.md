@@ -11,6 +11,7 @@
     3. US City Demographic Data: This dataset comes from OpenSoft [Source](https://public.opendatasoft.com/explore/dataset/us-cities-demographics/export/). Includes population formation of US states, like race and gender.
     4. Aiport Code table: [Source](https://datahub.io/core/airport-codes#data). Includes a collection of airport codes and their respective cities, countries around the world.
 - There is one more data which description of i94 immigration dataset. It contains country and state codes which I will be using in the analysis.
+- The data exploration, observations about the data are all done in pandas on a sampe data. This exploration is done in `Immigration data explore.ipynb` file.
 
 
 # Data model and design
