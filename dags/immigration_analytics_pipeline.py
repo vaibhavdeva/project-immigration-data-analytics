@@ -164,6 +164,13 @@ check_builds = PythonOperator(
     dag=dag
 )
 
+unit_test = PythonOperator(
+    task_id='unit_test',
+    python_callable = submit_pyspark_to_emr,
+    params={"file" : '/root/airflow/dags/transform/check__unit_test.py', "log" : False},
+    dag=dag
+)
+
 
 # create DAG
 begin >> create_cluster
@@ -176,8 +183,8 @@ build_reference >> [build_airport, build_demographics, build_weather, build_immi
 
 [build_airport, build_demographics, build_weather, build_immigration] >> [build_analytics_airport, build_analytics_immigration]
 
-[build_analytics_airport, build_analytics_immigration] >> check_builds
+[build_analytics_airport, build_analytics_immigration] >> [check_builds,unit_test]
 
-check_builds >> terminate_cluster
+[check_builds,unit_test] >> terminate_cluster
 
 terminate_cluster >> end
